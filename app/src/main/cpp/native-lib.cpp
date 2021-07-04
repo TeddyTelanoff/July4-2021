@@ -1,5 +1,4 @@
 #include <jni.h>
-#include <chrono>
 #include <cmath>
 #include <GLES3/gl3.h>
 
