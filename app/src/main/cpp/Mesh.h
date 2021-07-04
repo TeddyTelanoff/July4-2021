@@ -1,12 +1,10 @@
 #pragma once
 
-#include "Renderer.h"
 #include "Shader.h"
 #include <GLES3/gl3.h>
 
 struct Mesh
 {
-	const Shader &shader;
 	GLuint vao, ibo;
 
 	static constexpr GLfloat verts[] = {
@@ -21,8 +19,7 @@ struct Mesh
 		0, 2, 3,
 	};
 
-	Mesh(const Shader &shader):
-		shader(shader)
+	Mesh()
 	{
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
@@ -40,7 +37,7 @@ struct Mesh
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(inds), inds, GL_STATIC_DRAW);
 	}
 
-	void Bind()
+	void Bind() const
 	{
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);

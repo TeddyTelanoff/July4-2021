@@ -22,13 +22,16 @@ struct Shader
 		glDeleteShader(fs);
 	}
 
-	void Bind()
+	void Bind() const
 	{ glUseProgram(prog); }
 
-	static void CompileShader(GLenum ty, const char *src)
+	void SetUniform(GLint loc, Vector2 vec2)
+	{ glUniform2f(loc, vec2.x, vec2.y); }
+
+	static GLuint CompileShader(GLenum ty, const char *src)
 	{
 		GLuint id = glCreateShader(ty);
-		glShaderSource(shader, 1, &src, NULL);
+		glShaderSource(id, 1, &src, NULL);
 		glCompileShader(id);
 
 		GLint status;
