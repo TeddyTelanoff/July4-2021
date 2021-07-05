@@ -5,6 +5,7 @@ using UnityEngine;
 public class Firework : MonoBehaviour
 {
 	public GameObject model;
+	public AudioSource explode, wish;
     public ParticleSystem flare, trail;
 	public float speed, end, off, dir;
 	public float vel;
@@ -29,7 +30,9 @@ public class Firework : MonoBehaviour
 	private IEnumerator Flare()
 	{
 		flare.Play();
+		wish.Stop();
 		trail.Stop();
+		explode.Play();
 		Destroy(model);
 		yield return new WaitForSeconds(flare.main.duration);
 		yield return new WaitForEndOfFrame();
